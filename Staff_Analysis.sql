@@ -166,6 +166,30 @@ sum(total) for gender IN (Female, Male)
 order by department;
 
 -- 
+SELECT * FROM [master].[dbo].[company_divisions]
+
+Select * from [master].[dbo].[company_regions]
+
+select * from [master].[dbo].[staff]
+
+SELECT last_name, department, salary  FROM [master].[dbo].[staff], [master].[dbo].[company_regions]
+WHERE [master].[dbo].[company_regions].region_id = [master].[dbo].[staff].region_id 
+AND [master].[dbo].[company_regions].region_id = '2'
+
+SELECT last_name, department, salary  FROM [master].[dbo].[staff]
+WHERE region_id IN (SELECT region_id  FROM [master].[dbo].[company_regions] WHERE region_id = '2' AND
+[master].[dbo].[company_regions].region_id = [master].[dbo].[staff].region_id) 
+
+SELECT  *  FROM  [master].[dbo].[company_regions] full outer join [master].[dbo].[staff]
+on [master].[dbo].[company_regions].region_id = [master].[dbo].[staff].region_id
+
+SELECT  *  FROM  [master].[dbo].[company_divisions] full outer join [master].[dbo].[staff]
+on [master].[dbo].[company_divisions].department = [master].[dbo].[staff].department
+
+SELECT  *  FROM  [master].[dbo].[company_divisions], [master].[dbo].[staff]
+WHERE [master].[dbo].[company_divisions].department = [master].[dbo].[staff].department
+
+UPDATE [master].[dbo].[staff] SET salary = salary + Salary WHERE job_title = 'Structural Engineer'
 
 
 
